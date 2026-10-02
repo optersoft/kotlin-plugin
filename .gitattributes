@@ -1,0 +1,9 @@
+* text=auto
+
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# Kotlin CLI wrapper without extension
+kotlin text eol=lf
+
+*.db binary

@@ -1,0 +1,10 @@
+Kotlin Toolchain plugins
+Copyright 2026 Optersoft, S.L.
+
+This product is licensed under the Apache License, Version 2.0 (LICENSE).
+
+sqldelight/src/SqlDelightEnvironment.kt and sqldelight/src/OptimisticLockCompilerAnnotator.kt are
+copied, with the changes stated in each file, from SQLDelight 2.4.0
+(https://github.com/sqldelight/sqldelight), Copyright (C) 2017 Square, Inc., licensed under the
+Apache License, Version 2.0. sqldelight/src/Migrations.kt follows SQLDelight's Gradle tasks
+VerifyMigrationTask and GenerateSchemaTask.

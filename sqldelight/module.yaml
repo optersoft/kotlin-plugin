@@ -1,0 +1,15 @@
+product: jvm/amper-plugin
+
+description: Generates Kotlin from SQLDelight .sq and .sqm files.
+
+# Only to compile the code that runs in the forked compiler JVM: at build time that JVM gets the
+# libraries listed in plugin.yaml, resolved from Maven Central.
+dependencies:
+  - app.cash.sqldelight:compiler-env:2.4.0: compile-only
+  - app.cash.sqldelight:core:2.4.0: compile-only
+  - app.cash.sqldelight:migrations:2.4.0: compile-only
+  - dev.lysine.sql-psi:environment:0.8.0: compile-only
+
+pluginInfo:
+  id: sqldelight
+  settingsClass: com.optersoft.sqldelight.Settings

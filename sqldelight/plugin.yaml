@@ -1,0 +1,67 @@
+# The SQLDelight version is written in this file and in module.yaml: change all of them together.
+tasks:
+  generate:
+    action: !com.optersoft.sqldelight.generate
+      sourceDir: ${module.rootDir}/${pluginSettings.sourceDir}
+      outputDir: ${taskOutputDir}
+      compiler:
+        dependencies:
+          - app.cash.sqldelight:compiler-env:2.4.0
+          - app.cash.sqldelight:core:2.4.0
+          - dev.lysine.sql-psi:environment:0.8.0
+          # Reads the .db schema files, which the .sqm files are checked against.
+          - app.cash.sqldelight:migrations:2.4.0
+          - app.cash.sqldelight:migration-env:2.4.0
+          # Brings every SQLite dialect, 3.18 to 3.44; the `dialect` setting picks one.
+          - app.cash.sqldelight:sqlite-3-44-dialect:2.4.0
+      extra:
+        dependencies: ${pluginSettings.compilerDependencies}
+      moduleName: ${module.name}
+      packageName: ${pluginSettings.packageName}
+      databaseName: ${pluginSettings.databaseName}
+      dialect: ${pluginSettings.dialect}
+      deriveSchemaFromMigrations: ${pluginSettings.deriveSchemaFromMigrations}
+      verifyMigrations: ${pluginSettings.verifyMigrations}
+      generateAsync: ${pluginSettings.generateAsync}
+      treatNullAsUnknownForEquality: ${pluginSettings.treatNullAsUnknownForEquality}
+      expandSelectStar: ${pluginSettings.expandSelectStar}
+      codegenExcludedColumns: ${pluginSettings.codegenExcludedColumns}
+
+  verify:
+    action: !com.optersoft.sqldelight.verify
+      sourceDir: ${tasks.generate.action.sourceDir}
+      compiler: ${tasks.generate.action.compiler}
+      extra:
+        dependencies: ${pluginSettings.compilerDependencies}
+      moduleName: ${module.name}
+      packageName: ${pluginSettings.packageName}
+      databaseName: ${pluginSettings.databaseName}
+      dialect: ${pluginSettings.dialect}
+      deriveSchemaFromMigrations: ${pluginSettings.deriveSchemaFromMigrations}
+      verifyMigrations: ${pluginSettings.verifyMigrations}
+      verifyDefinitions: ${pluginSettings.verifyDefinitions}
+
+  schema:
+    action: !com.optersoft.sqldelight.schema
+      sourceDir: ${tasks.generate.action.sourceDir}
+      outputDir: ${tasks.generate.action.sourceDir}/databases
+      compiler: ${tasks.generate.action.compiler}
+      extra:
+        dependencies: ${pluginSettings.compilerDependencies}
+      moduleName: ${module.name}
+      packageName: ${pluginSettings.packageName}
+      databaseName: ${pluginSettings.databaseName}
+      dialect: ${pluginSettings.dialect}
+      deriveSchemaFromMigrations: ${pluginSettings.deriveSchemaFromMigrations}
+
+generated:
+  sources:
+    - language: kotlin
+      directory: ${tasks.generate.action.outputDir}
+
+checks:
+  - name: migrations
+    performedBy: verify
+
+commands:
+  - schema

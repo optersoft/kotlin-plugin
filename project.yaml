@@ -1,0 +1,8 @@
+modules:
+  - examples/sqldelight-basic
+  - examples/sqldelight-derived
+  - examples/sqldelight-migration
+  - sqldelight
+
+plugins:
+  - ./sqldelight

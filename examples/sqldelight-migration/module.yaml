@@ -1,0 +1,15 @@
+product: jvm/lib
+
+dependencies:
+  - app.cash.sqldelight:runtime:2.4.0
+
+test-dependencies:
+  - app.cash.sqldelight:sqlite-driver:2.4.0
+  - org.jetbrains.kotlin:kotlin-test:2.4.20
+
+plugins:
+  sqldelight:
+    enabled: true
+    packageName: pets.db
+    dialect: sqlite-3-38-dialect
+    verifyMigrations: true

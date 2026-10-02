@@ -1,0 +1,5 @@
+insert:
+INSERT INTO Dog (name, born) VALUES (?, ?);
+
+select:
+SELECT * FROM Dog ORDER BY name;

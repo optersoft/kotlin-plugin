@@ -1,0 +1,14 @@
+CREATE TABLE Dog (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    born INTEGER NOT NULL
+);
+
+insert:
+INSERT INTO Dog (name, born) VALUES (?, ?) RETURNING *;
+
+select:
+SELECT * FROM Dog ORDER BY born;
+
+selectNames:
+SELECT name FROM Dog WHERE born < :year ORDER BY name;
